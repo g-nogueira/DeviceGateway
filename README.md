@@ -1,6 +1,6 @@
 THIS IS JUST A INTERVIEW CHALLENGE. TAKE EVERYTHING HERE WITH A GRAIN OF SALT
 
-The Devices service is an API Gateway which provides endpoints for managing 1Global eSIM devices. 
+The Devices service is an API Gateway which provides endpoints for managing devices. 
 
 The goal of this microservice is to be secure, scalable, efficient, and traceable, while maintaining a good implementation of a REST API and Domain Driven Design
 
