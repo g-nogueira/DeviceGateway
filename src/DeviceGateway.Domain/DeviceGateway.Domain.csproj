@@ -4,10 +4,10 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.5.0" /> <!-- MediartR >= 13 changes to a paid license -->
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.13" />
     </ItemGroup>
 
