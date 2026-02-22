@@ -4,8 +4,10 @@ namespace DeviceGateway.Api;
 
 public static class EndpointExtensions
 {
-    public static void MapEndpoints(this WebApplication app)
+    public static WebApplication MapEndpoints(this WebApplication app)
     {
         app.MapDevicesEndpoints();
+
+        return app;
     } 
 }
