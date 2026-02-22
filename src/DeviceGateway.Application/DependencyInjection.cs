@@ -1,3 +1,4 @@
+using DeviceGateway.Application.Common.Behaviors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,11 @@ public static class DependencyInjection
     {
         var assembly = typeof(DependencyInjection).Assembly;
         
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(assembly);
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+        });
         
         services.AddValidatorsFromAssembly(assembly);
         
