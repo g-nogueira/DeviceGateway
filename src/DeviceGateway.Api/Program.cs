@@ -2,6 +2,10 @@ using DeviceGateway.Api;
 using DeviceGateway.Application;
 using DeviceGateway.Domain;
 using DeviceGateway.Infrastructure;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -27,6 +31,26 @@ try
             .Enrich.FromLogContext()
             .WriteTo.Console(new JsonFormatter());
     });
+
+    // Setup Tracing & Metrics
+    builder.Services.AddOpenTelemetry()
+        .UseOtlpExporter()
+        .WithTracing(tracingBuilder =>
+        {
+            tracingBuilder
+                .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddSource("DeviceGateway.Api")
+                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("DeviceGateway.Api"));
+        })
+        .WithMetrics(metricsBuilder =>
+        {
+            metricsBuilder
+                .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddMeter("System.Runtime")
+                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("DeviceGateway.Api"));
+        });
 
     Log.Information("Configuring services");
     // Add Services
