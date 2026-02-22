@@ -26,7 +26,6 @@
 
     <ItemGroup>
       <Folder Include="Mappings\" />
-      <Folder Include="Middleware\" />
     </ItemGroup>
 
     <ItemGroup>
