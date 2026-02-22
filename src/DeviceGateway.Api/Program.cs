@@ -58,7 +58,6 @@ try
         .AddOpenApi()
         .AddApi(builder.Configuration)
         .AddApplication(builder.Configuration)
-        .AddDomain(builder.Configuration)
         .AddInfrastructure(builder.Configuration);
 
     var app = builder.Build();
