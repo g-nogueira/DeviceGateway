@@ -51,6 +51,8 @@ try
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("DeviceGateway.Api"));
         });
 
+    builder.Services.AddProblemDetails();
+
     Log.Information("Configuring services");
     // Add Services
     builder.Services
@@ -61,6 +63,9 @@ try
     var app = builder.Build();
 
     Log.Information("Configuring middleware");
+
+    app.UseExceptionHandler();
+
     // Add Endpoints
     app.MapEndpoints();
 
