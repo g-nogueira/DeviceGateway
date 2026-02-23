@@ -1,8 +1,9 @@
+using DeviceGateway.Domain.Common;
 using MediatR;
 
 namespace DeviceGateway.Application.Features.Devices.CreateDevice;
 
-public class CreateDeviceHandler : IRequestHandler<CreateDeviceCommand, CreateDeviceResponse>
+public class CreateDeviceHandler : IRequestHandler<CreateDeviceCommand, Result<CreateDeviceResponse>>
 {
-    public Task<CreateDeviceResponse> Handle(CreateDeviceCommand request, CancellationToken cancellationToken) => throw new NotImplementedException();
+    public Task<Result<CreateDeviceResponse>> Handle(CreateDeviceCommand request, CancellationToken cancellationToken) => throw new NotImplementedException();
 }
