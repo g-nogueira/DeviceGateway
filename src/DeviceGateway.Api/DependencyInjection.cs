@@ -8,6 +8,8 @@ public static class DependencyInjection
     {
         var assembly = typeof(DependencyInjection).Assembly;
 
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+
         services.AddOpenApi();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
