@@ -29,4 +29,5 @@ RUN dotnet publish "DeviceGateway.Api.csproj" -c Release -o /app/publish /p:UseA
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
+USER $APP_UID
 ENTRYPOINT ["dotnet", "DeviceGateway.Api.dll"]
