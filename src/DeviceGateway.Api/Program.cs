@@ -14,7 +14,7 @@ using Serilog.Formatting.Json;
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
     .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .WriteTo.Console(new JsonFormatter())
     .CreateBootstrapLogger();
 
 try
@@ -28,8 +28,7 @@ try
         configuration
             .ReadFrom.Configuration(context.Configuration)
             .ReadFrom.Services(services)
-            .Enrich.FromLogContext()
-            .WriteTo.Console(new JsonFormatter());
+            .Enrich.FromLogContext();
     });
 
     // Setup Tracing & Metrics
