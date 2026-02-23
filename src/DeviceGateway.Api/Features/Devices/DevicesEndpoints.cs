@@ -1,4 +1,3 @@
-using DeviceGateway.Api.Middleware;
 using DeviceGateway.Application.Features.Devices.CreateDevice;
 using MediatR;
 
