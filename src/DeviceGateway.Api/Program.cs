@@ -65,20 +65,16 @@ try
     Log.Information("Configuring middleware");
 
     app.UseExceptionHandler();
-
-    // Add Endpoints
     app.UseHttpsRedirection();
-    app.MapEndpoints();
 
-    // Configure Dev only env
     if (app.Environment.IsDevelopment())
     {
-        app.UseDeveloperExceptionPage();
-        app
-            .UseSwagger()
-            .UseSwaggerUI();
+        app.UseSwagger();
+        app.UseSwaggerUI();
     }
 
+    // Add Endpoints
+    app.MapEndpoints();
 
     Log.Information("Starting application");
     app.Run();
