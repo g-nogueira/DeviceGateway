@@ -4,6 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,16 +24,26 @@
         <PackageReference Include="Serilog.Expressions" Version="5.1.0-dev-02309" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.4" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Mappings\" />
+      <Folder Include="Middleware\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DeviceGateway.Infrastructure\DeviceGateway.Infrastructure.csproj" />
       <ProjectReference Include="..\DeviceGateway.Application\DeviceGateway.Application.csproj" />
       <ProjectReference Include="..\DeviceGateway.Domain\DeviceGateway.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
