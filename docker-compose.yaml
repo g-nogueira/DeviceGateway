@@ -1,0 +1,42 @@
+name: DeviceGateway
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6666:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=devicemanager;Username=admin;Password=password123
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+    depends_on:
+      - db
+      - otel-collector
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: devicemanager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  ## The OTEL Collector receives telemetry data from the API and exports it to Jaeger for tracing visualization.
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    volumes:
+      - ./otel-config.yaml:/etc/otel-config.yaml
+    command: [ "--config=/etc/otel-config.yaml" ]
+    depends_on:
+      - jaeger
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "4317:4317"  # OTLP gRPC port
+
+volumes:
+  postgres_data:
