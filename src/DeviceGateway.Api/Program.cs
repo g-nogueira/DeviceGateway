@@ -67,6 +67,7 @@ try
     app.UseExceptionHandler();
 
     // Add Endpoints
+    app.UseHttpsRedirection();
     app.MapEndpoints();
 
     // Configure Dev only env
@@ -78,7 +79,6 @@ try
             .UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
 
     Log.Information("Starting application");
     app.Run();
