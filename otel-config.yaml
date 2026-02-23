@@ -1,0 +1,35 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      # Not used in this setup, but is useful for frontend apps, for example.
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  # Waits until it has a batch of 8192 items or 10s has passed before sending to the exporter. I didn't spent time tuning this.
+  batch:
+
+exporters:
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    # In an internal K8s/docker network, we should be sage skipping TLS verification. Ideally the communication between the pods would stay behind a LB or something like that (?). I din't spent a lot of time looking into this.
+    tls:
+      insecure: true
+  
+  # Debug exporter for debugging (optional)
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/jaeger, debug]
+    
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
