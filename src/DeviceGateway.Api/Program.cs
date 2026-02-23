@@ -54,7 +54,6 @@ try
     Log.Information("Configuring services");
     // Add Services
     builder.Services
-        .AddOpenApi()
         .AddApi(builder.Configuration)
         .AddApplication(builder.Configuration)
         .AddInfrastructure(builder.Configuration);
@@ -68,7 +67,10 @@ try
     // Configure Dev only env
     if (app.Environment.IsDevelopment())
     {
-        app.MapOpenApi();
+        app.UseDeveloperExceptionPage();
+        app
+            .UseSwagger()
+            .UseSwaggerUI();
     }
 
     app.UseHttpsRedirection();
