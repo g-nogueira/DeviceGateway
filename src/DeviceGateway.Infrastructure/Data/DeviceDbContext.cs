@@ -2,7 +2,4 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DeviceGateway.Infrastructure.Data;
 
-public class DeviceDbContext : DbContext
-{
-    
-}
+public class DeviceDbContext(DbContextOptions<DeviceDbContext> options) : DbContext(options);
