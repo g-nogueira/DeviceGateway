@@ -30,8 +30,11 @@ public class DeviceRepository(DeviceDbContext context) : IDeviceRepository
             .ContinueWith(IEnumerable<Device> (t) => t.Result, ct);
 
     /// <inheritdoc/>
-    public async Task AddAsync(Device device, CancellationToken ct = default) =>
+    public async Task<Result<Guid>> AddAsync(Device device, CancellationToken ct = default)
+    {
         await context.Devices.AddAsync(device, ct);
+        return Result<Guid>.Success(device.Id);
+    }
 
     /// <inheritdoc/>
     public async Task<Result> UpdateAsync(Device incomingDevice, CancellationToken ct)

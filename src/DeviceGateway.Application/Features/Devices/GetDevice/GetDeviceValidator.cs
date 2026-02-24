@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace DeviceGateway.Application.Features.Devices.CreateDevice;
 
-public class CreateDeviceValidator : AbstractValidator<CreateDeviceCommand>
+public class GetDeviceValidator : AbstractValidator<CreateDeviceCommand>
 {
-    public CreateDeviceValidator()
+    public GetDeviceValidator()
     {
         // Rule for the Name property
         RuleFor(x => x.Name)

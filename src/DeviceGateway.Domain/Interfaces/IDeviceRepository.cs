@@ -20,7 +20,7 @@ public interface IDeviceRepository
     /// <summary>
     /// Adds a new device to the repository.
     /// </summary>
-    Task AddAsync(Device device, CancellationToken ct = default);
+    Task<Result<Guid>> AddAsync(Device device, CancellationToken ct = default);
 
     /// <summary>
     /// Updates an existing device in the repository. The device must already exist; otherwise, a failure result is returned.
@@ -36,4 +36,9 @@ public interface IDeviceRepository
     /// Checks if a device with the specified unique identifier exists in the repository.
     /// </summary>
     Task<bool> ExistsAsync(Guid id, CancellationToken ct = default);
+    
+    /// <summary>
+    /// Commits all changes made to the repository.
+    /// </summary>
+    Task SaveChangesAsync(CancellationToken ct);
 }

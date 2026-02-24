@@ -4,6 +4,16 @@ namespace DeviceGateway.Domain.Entities;
 
 public class Device
 {
+
+    public Device(string name, Guid brandId)
+    {
+        Id = Guid.CreateVersion7();
+        Name = name;
+        BrandId = brandId;
+        State = DeviceState.Available;
+        CreatedAt = DateTimeOffset.UtcNow;
+    }
+    
     ///  Id using a time marked UUID / GuidV7
     public Guid Id { get; private set; }
 

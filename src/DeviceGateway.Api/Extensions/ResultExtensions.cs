@@ -7,6 +7,9 @@ namespace DeviceGateway.Api.Extensions;
 /// Extension methods to convert domain <see cref="Result"/> and <see cref="Result{TValue}"/> to HTTP <see cref="IResult"/>.
 /// Maps <see cref="ErrorType"/> to appropriate HTTP status codes following RFC 7807 Problem Details.
 /// </summary>
+/// <remarks>
+/// This class was fully implemented by the AI Agent based on my prompt, but I reviewed and changed it to fit my needs.
+/// </remarks>
 public static class ResultExtensions
 {
     /// <summary>

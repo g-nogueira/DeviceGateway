@@ -1,3 +1,4 @@
+using DeviceGateway.Domain.Common;
 using FluentValidation;
 using MediatR;
 
@@ -37,8 +38,12 @@ public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TReq
 
         if (failures.Count != 0)
         {
-            // TODO: Implement Validation failure handling
-            throw new ValidationException(failures);
+            // Ideally we would return all validation errors, but I'm return only the first one to keep the time constrained.
+            var errors = failures
+                .Select(f => Result.Failure($"{f.PropertyName} failed validation. Error: {f.ErrorMessage}", ErrorType.Validation))
+                .ToList();
+
+            return (TResponse)(object)errors.First();
         }
 
         return await next(cancellationToken);

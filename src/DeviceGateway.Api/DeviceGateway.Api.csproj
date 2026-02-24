@@ -19,6 +19,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.0" />
         <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.15.0-beta.1" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.15.0" />
+        <PackageReference Include="Riok.Mapperly" Version="5.0.0-next.2" />
         <PackageReference Include="Serilog" Version="4.3.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Serilog.Expressions" Version="5.1.0-dev-02309" />
@@ -30,7 +31,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Mappings\" />
       <Folder Include="Middleware\" />
     </ItemGroup>
 
