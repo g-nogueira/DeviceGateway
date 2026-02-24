@@ -1,6 +1,6 @@
 # Devices API Gateway
 
-THIS IS JUST A INTERVIEW CHALLENGE. TAKE EVERYTHING HERE WITH A GRAIN OF SALT
+THIS IS JUST A PoC. TAKE EVERYTHING HERE WITH A GRAIN OF SALT
 
 The Devices service is an API Gateway which provides endpoints for managing devices. 
 
