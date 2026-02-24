@@ -187,3 +187,4 @@ The API will be available at **http://localhost:6666**.
 - Add XML doc comments and documentation
 - Initialize the DB
 - Performance testing and optimization
+- Use a Vault for secrets management instead of hardcoding credentials
