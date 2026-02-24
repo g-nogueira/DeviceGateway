@@ -3,7 +3,4 @@ using MediatR;
 
 namespace DeviceGateway.Application.Features.Devices.CreateDevice;
 
-public class CreateDeviceCommand : IRequest<Result<CreateDeviceResponse>>
-{
-    
-}
+public record CreateDeviceCommand(string Name, Guid BrandId) : IRequest<Result<Guid>>;

@@ -1,0 +1,32 @@
+name: DeviceGateway-infra
+
+services:
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: devicemanager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    ports:
+      - "4317:4317"   # OTLP gRPC – the API sends telemetry here
+      - "4318:4318"   # OTLP HTTP  (optional)
+    volumes:
+      - ./otel-config-local.yaml:/etc/otel-config.yaml
+    command: [ "--config=/etc/otel-config.yaml" ]
+    depends_on:
+      - jaeger
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # Jaeger UI
+
+volumes:
+  postgres_data:
