@@ -53,10 +53,10 @@ public class Device
         var (canUpdate, errorMessage) = CanUpdateName();
 
         if (!canUpdate)
-            return Result.Failure(errorMessage!);
+            return Result.Failure(errorMessage!, ErrorType.Validation);
 
         if (string.IsNullOrWhiteSpace(newName))
-            return Result.Failure("Device name cannot be empty.");
+            return Result.Failure("Device name cannot be empty.", ErrorType.Validation);
 
         Name = newName;
         return Result.Success();
@@ -83,13 +83,13 @@ public class Device
         BrandId = originalBrandId;
         Name = originalName;
 
-        return Result.Failure(stateError ?? nameError ?? "Invalid details");
+        return Result.Failure(stateError ?? nameError ?? "Invalid details", ErrorType.Validation);
     }
     
     public Result Delete()
     {
         if (State == DeviceState.InUse)
-            return Result.Failure("Cannot delete a device that is currently in use.");
+            return Result.Failure("Cannot delete a device that is currently in use.", ErrorType.Validation);
 
         State = DeviceState.Inactive;
         DeletedAt = DateTimeOffset.UtcNow;

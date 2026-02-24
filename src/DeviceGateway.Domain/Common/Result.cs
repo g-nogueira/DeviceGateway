@@ -22,7 +22,7 @@ public class Result
     private Result(Error error) => Error = error;
 
     public static Result Success() => new();
-    public static Result Failure(string error, ErrorType type = ErrorType.Validation) => new(new Error(error, type));
+    public static Result Failure(string error, ErrorType type) => new(new Error(error, type));
 }
 
 public class Result<TValue>
@@ -31,8 +31,10 @@ public class Result<TValue>
     public Error? Error { get; }
     public bool IsSuccess => Error == null;
     
+    private Result(TValue value) => Value = value;
     private Result(Error error) => Error = error;
 
+    public static Result<TValue> Success(TValue value) => new(value);
     /// Represents the result of an operation that returns a value, which can be either a success or a failure. In case of success, it contains the value; in case of failure, it contains an error object with details about the failure.
     public static Result<TValue> Failure(string error, ErrorType type) => new(new Error(error, type));
 }

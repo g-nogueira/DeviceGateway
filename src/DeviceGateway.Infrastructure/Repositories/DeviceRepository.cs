@@ -14,7 +14,7 @@ public class DeviceRepository(DeviceDbContext context) : IDeviceRepository
         var trackedDevice = await context.Devices.FirstOrDefaultAsync(d => d.Id == id, ct);
 
         if (trackedDevice == null)
-            return Result<Device>.Failure($"Device with ID {id} not found.");
+            return Result<Device>.Failure($"Device with ID {id} not found.", ErrorType.NotFound);
 
         return Result<Device>.Success(trackedDevice);
     }
@@ -40,7 +40,7 @@ public class DeviceRepository(DeviceDbContext context) : IDeviceRepository
             .FirstOrDefaultAsync(d => d.Id == incomingDevice.Id, ct);
 
         if (trackedDevice == null)
-            return Result.Failure($"Device with ID {incomingDevice.Id} not found.");
+            return Result.Failure($"Device with ID {incomingDevice.Id} not found.", ErrorType.NotFound);
 
         var result = trackedDevice.UpdateDetails(newName: incomingDevice.Name, newBrandId: incomingDevice.BrandId);
 
@@ -53,7 +53,7 @@ public class DeviceRepository(DeviceDbContext context) : IDeviceRepository
         var trackedDevice = await context.Devices.FirstOrDefaultAsync(d => d.Id == id, ct);
 
         if (trackedDevice == null)
-            return Result.Failure("Device not found.");
+            return Result.Failure("Device with ID {id} not found.", ErrorType.NotFound);
 
         var result = trackedDevice.Delete();
 
